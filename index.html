@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="search_dataset.js"></script>
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -32,10 +33,8 @@
             <select id="category-order">
                 
                 <option value="title">依標題排序</option>
-                <option value="created_atN">依建立時間（新到舊）</option>
-                <option value="created_atO">依建立時間（舊到新）</option>
-                <option value="popularityH">人氣（高到低）</option>
-                <option value="popularityL">人氣（低到高）</option>
+                <option value="created_at">按照時間</option>
+                <option value="popularity">按照人氣</option>
             </select>
         </div>
 
@@ -45,8 +44,8 @@
 
     </div>
 
-    <div id="results"></div>
+    <div id="search-results"></div> <!-- 這裡是搜尋結果的顯示區 -->
     <button id="load-more-button" style="display:none;">顯示更多</button>
-
-
 </body>
+
+</html>
