@@ -31,21 +31,21 @@ body {
     font-weight: bold;
 }
 
-/* 讓搜尋框 & 按鈕平均分佈 */
+
 .search-container {
     display: flex;
-    flex-wrap: wrap; /* 換行 */
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* 控制間距 */
+    gap: 10px;
     width: 100%;
 }
 
-/* 讓輸入框可以適應不同裝置 */
+
 .search-box {
-    flex: 1; /* 讓它可以拉伸 */
-    min-width: 200px; /* 避免太小 */
-    max-width: 500px; /* 避免過大 */
+    flex: 1; 
+    min-width: 200px;
+    max-width: 500px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -54,7 +54,7 @@ body {
     text-align: center;
 }
 
-/* 搜尋按鈕大小固定 */
+
 .search-button {
     padding: 10px 15px;
     font-size: 16px;
@@ -63,7 +63,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    white-space: nowrap; /* 避免文字折行 */
+    white-space: nowrap;
 }
 
 .search-button:hover {
@@ -82,7 +82,7 @@ body {
     border-radius: 50%;
 }
 
-/* 讓選單 & 統計數字在手機上換行 */
+
 .lower-row {
     display: flex;
     flex-wrap: wrap;
@@ -128,25 +128,25 @@ body {
     background: #0056b3;
 }
 
-/* RWD：針對小螢幕調整 */
+
 @media (max-width: 768px) {
     .upper-row {
-        flex-direction: column; /* 變為直向排列 */
-        align-items: center; /* 置中 */
+        flex-direction: column;
+        align-items: center;
         text-align: center;
     }
 
     .search-container {
-        flex-direction: column; /* 讓搜尋框與按鈕上下排列 */
+        flex-direction: column;
         align-items: center;
     }
 
     .search-box {
-        width: 80%; /* 讓搜尋框不會太窄 */
+        width: 80%;
     }
 
     .lower-row {
-        flex-direction: column; /* 讓選單換行 */
+        flex-direction: column;
         align-items: center;
     }
 

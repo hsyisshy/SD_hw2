@@ -1,10 +1,11 @@
 $(document).ready(function () {
-    let currentPage = 1; // 當前顯示的頁數
-    const itemsPerPage = 5; // 每頁顯示的數量
+    
+    let currentPage = 1; 
+    const itemsPerPage = 5; // 每頁顯示 5 筆資料
     let searchResults = []; // 儲存搜尋結果
-    let selectedSort = "title"; // 預設排序方式
+    let selectedSort = "title";
 
-    // 確保 SEARCH_DATASET 存在
+    // 防呆：確認資料集是否已載入
     if (typeof SEARCH_DATASET === "undefined") {
         console.error("❌ SEARCH_DATASET 未定義，請確認 search_dataset.js 已正確載入。");
         return;
@@ -12,8 +13,10 @@ $(document).ready(function () {
 
     console.log("✅ SEARCH_DATASET 成功載入，包含 " + SEARCH_DATASET.length + " 筆資料");
 
-    // 監聽搜尋按鈕點擊事件
+    // 搜尋按鈕
     $("#search-button").click(function () {
+
+        // 取得搜尋關鍵字
         let query = $("#search-box").val();
         console.log("搜尋框內容：", query);
 
@@ -23,10 +26,10 @@ $(document).ready(function () {
             return;
         }
 
-        query = query.trim(); // 去掉前後空白
+        query = query.trim(); // 防呆：去掉前後空白
         console.log("🔍 搜尋關鍵字 (去空格後)：", query);
 
-        // 執行搜尋 (忽略大小寫)
+        // 防呆：執行搜尋 (忽略大小寫)
         searchResults = SEARCH_DATASET.filter(item =>
             item.title.toLowerCase().includes(query.toLowerCase()) ||
             item.text.toLowerCase().includes(query.toLowerCase())
@@ -37,37 +40,37 @@ $(document).ready(function () {
         // 更新統計數
         $("#results-counter").text(`✅ 共找到 ${searchResults.length} 筆項目`);
 
-        // 重置分頁
+        // 重置
         currentPage = 1;
         $("#search-results").empty(); // 先清空舊結果
 
-        // 排序資料
+        // 排序
         sortResults();
 
-        // 顯示結果
+        // 顯示
         displayResults();
     });
 
-    // 監聽「排序方式」選單變化
+    // 排序選單：避免有人搜尋完又改排序
     $("#category-order").change(function () {
-        selectedSort = $(this).val(); // 取得選擇的排序方式
+        selectedSort = $(this).val(); // 選擇方式抓過來
         console.log("📌 變更排序方式：", selectedSort);
 
         // 重新排序 & 更新顯示
         sortResults();
-        currentPage = 1; // 重置分頁
+        currentPage = 1;
         $("#search-results").empty();
         displayResults();
     });
 
-    // **排序搜尋結果**
+    // 排序搜尋結果
     function sortResults() {
         if (selectedSort === "title") {
             searchResults.sort((a, b) => a.title.localeCompare(b.title, "zh-TW"));
         } else if (selectedSort === "created_at") {
-            searchResults.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // 新到舊
+            searchResults.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         } else if (selectedSort === "popularity") {
-            searchResults.sort((a, b) => b.popularity - a.popularity); // 人氣由高到低
+            searchResults.sort((a, b) => b.popularity - a.popularity); 
         }
         console.log("✅ 排序完成，依據：" + selectedSort);
     }
@@ -90,7 +93,7 @@ $(document).ready(function () {
             `;
         });
 
-        $("#search-results").append(resultHTML); // **使用 append() 保留舊資料**
+        $("#search-results").append(resultHTML);
 
         // 檢查是否還有更多結果
         if (end < searchResults.length) {
@@ -100,9 +103,10 @@ $(document).ready(function () {
         }
     }
 
-    // 監聽「顯示更多」按鈕點擊事件
+    //顯示更多
     $("#load-more-button").click(function () {
-        currentPage++; // 增加頁數
+        currentPage++;
         displayResults();
     });
+
 });
