@@ -2,6 +2,7 @@ $(document).ready(function () {
     let currentPage = 1; // 當前顯示的頁數
     const itemsPerPage = 5; // 每頁顯示的數量
     let searchResults = []; // 儲存搜尋結果
+    let selectedSort = "title"; // 預設排序方式
 
     // 確保 SEARCH_DATASET 存在
     if (typeof SEARCH_DATASET === "undefined") {
@@ -22,7 +23,7 @@ $(document).ready(function () {
             return;
         }
 
-        query = query.trim(); // 這裡才執行 trim()
+        query = query.trim(); // 去掉前後空白
         console.log("🔍 搜尋關鍵字 (去空格後)：", query);
 
         // 執行搜尋 (忽略大小寫)
@@ -38,19 +39,41 @@ $(document).ready(function () {
 
         // 重置分頁
         currentPage = 1;
+        $("#search-results").empty(); // 先清空舊結果
+
+        // 排序資料
+        sortResults();
+
+        // 顯示結果
         displayResults();
     });
 
-    // 顯示搜尋結果 (控制每次只顯示 5 筆)
-    function displayResults() {
-        let resultsContainer = $("#search-results");
-        resultsContainer.empty(); // 清空舊的搜尋結果
+    // 監聽「排序方式」選單變化
+    $("#category-order").change(function () {
+        selectedSort = $(this).val(); // 取得選擇的排序方式
+        console.log("📌 變更排序方式：", selectedSort);
 
-        if (searchResults.length === 0) {
-            resultsContainer.html("<p>❌ 未找到符合的結果。</p>");
-            return;
+        // 重新排序 & 更新顯示
+        sortResults();
+        currentPage = 1; // 重置分頁
+        $("#search-results").empty();
+        displayResults();
+    });
+
+    // **排序搜尋結果**
+    function sortResults() {
+        if (selectedSort === "title") {
+            searchResults.sort((a, b) => a.title.localeCompare(b.title, "zh-TW"));
+        } else if (selectedSort === "created_at") {
+            searchResults.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // 新到舊
+        } else if (selectedSort === "popularity") {
+            searchResults.sort((a, b) => b.popularity - a.popularity); // 人氣由高到低
         }
+        console.log("✅ 排序完成，依據：" + selectedSort);
+    }
 
+    // 顯示搜尋結果 (控制每次只顯示 5 筆，但不清除舊結果)
+    function displayResults() {
         let start = (currentPage - 1) * itemsPerPage;
         let end = start + itemsPerPage;
         let paginatedResults = searchResults.slice(start, end); // 取當前頁數範圍的資料
@@ -61,11 +84,13 @@ $(document).ready(function () {
                 <div class="search-result">
                     <h3><a href="${item.url}" target="_blank">${item.title || "無標題"}</a></h3>
                     <p>${item.text}</p>
+                    <p><strong>時間：</strong>${item.created_at}</p>
+                    <p><strong>人氣：</strong>${item.popularity}</p>
                 </div>
             `;
         });
 
-        resultsContainer.append(resultHTML); // 插入新的結果
+        $("#search-results").append(resultHTML); // **使用 append() 保留舊資料**
 
         // 檢查是否還有更多結果
         if (end < searchResults.length) {
