@@ -84,4 +84,40 @@ body {
     border-top: 1px solid #ddd;
 }
 
+#search-results {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 2px solid #ddd;
+}
+
+.search-result {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-result h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.search-result p {
+    font-size: 14px;
+    color: #555;
+}
+
+#load-more-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#load-more-button:hover {
+    background: #0056b3;
+}
+
 
