@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCU Search</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="search_dataset.js"></script>
+</head>
+
+<body>
+    <div class = "container">
+
+        <div class="upper-row">
+            <h2 class="logo-text">NCU Search</h2>
+            <div class="search-container">
+                <input type="text" class="search-box" value="國立中央大學" disabled>
+                <button id="search-button" class="search-button">Search</button>
+            </div>
+    
+            <div class="user-icon">
+                <img src="user-icon.png" alt="User Icon">
+            </div>
+        </div>
+        
+        <div class="lower-row">
+            <p id="results-counter">共找到 0 筆項目</p>
+            <label for="category-order">排序方式</label>
+            <select id="category-order">
+                
+                <option value="title">依標題排序</option>
+                <option value="created_atN">依建立時間（新到舊）</option>
+                <option value="created_atO">依建立時間（舊到新）</option>
+                <option value="popularityH">人氣（高到低）</option>
+                <option value="popularityL">人氣（低到高）</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="container-2">
+
+    </div>
+
+    <div id="results"></div>
+    <button id="load-more-button" style="display:none;">顯示更多</button>
+
+
+</body>

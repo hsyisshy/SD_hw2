@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.upper-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 讓 LOGO、搜尋框、使用者圖示均分 */
+    gap: 20px;
+}
+
+.logo-text {
+    flex: 1;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.search-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #eee;
+    text-align: center;
+}
+
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background: #0056b3;
+}
+
+.user-icon {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.lower-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 讓統計 & 排序間隔 */
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+
